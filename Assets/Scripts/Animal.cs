@@ -6,7 +6,6 @@ public class Animal : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] bool movingRight;
-    [SerializeField] GameManager gm;
 
     float minX, maxX;
     int puntosDeVida = 5;
@@ -53,7 +52,13 @@ public class Animal : MonoBehaviour
         
         if(collision.gameObject.CompareTag("Disparo") )
         {
-            gm.ReducirNumEnemigos();
+            //1. Encontrar el objeto llamado "GameManager"
+            //2. Encontrar el componente de ese objeto de tipo "GameManager"
+            //3. Llamar la función CaptureAnimal()
+            GameObject gm = GameObject.Find("GameManager");
+            GameManager script = gm.GetComponent<GameManager>();
+            script.CaptureAnimal();
+
             Destroy(this.gameObject);
         }
     }
