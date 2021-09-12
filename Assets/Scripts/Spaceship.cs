@@ -19,7 +19,7 @@ public class Spaceship : MonoBehaviour
     float nextFire = 0;
     float nextRafaga = 0;
     bool cambiarBala = true;
-    int veceshabilidad = 3;
+   // int veceshabilidad = 3;
 
 
 
@@ -60,7 +60,7 @@ public class Spaceship : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
             cambiarBala = cambiarBala ? false : true;
 
-        HabilidadEspecial();
+       // HabilidadEspecial();
 
     }
 
@@ -119,7 +119,7 @@ public class Spaceship : MonoBehaviour
         }
     }
 
-    public void HabilidadEspecial()
+    /*public void HabilidadEspecial()
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -134,6 +134,6 @@ public class Spaceship : MonoBehaviour
 
             }
         }
-    }
+    }*/
 
 }
