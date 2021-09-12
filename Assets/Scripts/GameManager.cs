@@ -9,10 +9,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject gameOverMenu;
     [SerializeField] int numAnimals;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -21,9 +22,17 @@ public class GameManager : MonoBehaviour
         PauseGame();
     }
 
-    public void StartGame()
+    public void Nivel1()
     {
         SceneManager.LoadScene(1);
+    }
+    public void Nivel2()
+    {
+        SceneManager.LoadScene(2);
+    }
+    public void Nivel3()
+    {
+        SceneManager.LoadScene(3);
     }
 
     public void BackToMainMenu()
@@ -56,9 +65,9 @@ public class GameManager : MonoBehaviour
         numAnimals = numAnimals - 1;
         if(numAnimals < 1)
         {
-            //ganamos!
             Time.timeScale = 0;
             gameOverMenu.SetActive(true);
         }
     }
+
 }

@@ -6,9 +6,11 @@ public class Animal : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] bool movingRight;
+    [SerializeField] int puntosDeVida;
 
     float minX, maxX;
-    int puntosDeVida = 5;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,7 @@ public class Animal : MonoBehaviour
 
         maxX = esquinaInfDer.x;
         minX = esquinaInfIzq.x;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -52,15 +55,31 @@ public class Animal : MonoBehaviour
         
         if(collision.gameObject.CompareTag("Disparo") )
         {
-            //1. Encontrar el objeto llamado "GameManager"
-            //2. Encontrar el componente de ese objeto de tipo "GameManager"
-            //3. Llamar la función CaptureAnimal()
-            GameObject gm = GameObject.Find("GameManager");
-            GameManager script = gm.GetComponent<GameManager>();
-            script.CaptureAnimal();
 
-            Destroy(this.gameObject);
+            if (Time.timeScale == 1)
+            {
+                puntosDeVida--;
+
+                if (puntosDeVida <= 0)
+                {
+                    Mataranimal();
+                }
+            }
+            else if (Time.timeScale == 0.5f)
+            {
+                Mataranimal();
+            }
         }
     }
+
+    public void Mataranimal ()
+    {
+        GameObject gm = GameObject.Find("GameManager");
+        GameManager script = gm.GetComponent<GameManager>();
+        script.CaptureAnimal();
+
+        Destroy(this.gameObject);
+    }
+
 
 }

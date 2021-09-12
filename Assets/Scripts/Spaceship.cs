@@ -8,14 +8,19 @@ public class Spaceship : MonoBehaviour
     [SerializeField] GameObject bala;
     [SerializeField] GameObject balaRafaga;
     [SerializeField] GameObject disparador;
+    [SerializeField] GameObject balaUI;
+    [SerializeField] GameObject balarafagaUI;
 
     [SerializeField] float fireRate;
-    
+
+
 
     float minX, maxX, minY, maxY;
     float nextFire = 0;
     float nextRafaga = 0;
     bool cambiarBala = true;
+    int veceshabilidad = 3;
+
 
 
 
@@ -31,11 +36,6 @@ public class Spaceship : MonoBehaviour
         minX = puntoMinParaY.x + 0.7f;
         minY = puntoMinParaY.y;
 
-       
-
-        // World space = el espacio de juego
-        // screen space = la resolucion
-        // viewport = la camara
     }
 
     // Update is called once per frame
@@ -43,24 +43,36 @@ public class Spaceship : MonoBehaviour
     {
         MoverNave();
         if (cambiarBala)
+        {
             Disparar();
+            balaUI.SetActive(true);
+            balarafagaUI.SetActive(false);
+        }
         else
+        {
             DispararRafaga();
+            balaUI.SetActive(false);
+            balarafagaUI.SetActive(true);
+        }
+
 
 
         if (Input.GetKeyDown(KeyCode.Z))
             cambiarBala = cambiarBala ? false : true;
 
+        HabilidadEspecial();
+
     }
 
     void DispararRafaga()
     {
-        if(Input.GetKey(KeyCode.Space) && Time.time >= nextRafaga)
+
+        if (Input.GetKey(KeyCode.Space) && Time.time >= nextRafaga)
         {
             Instantiate(balaRafaga, disparador.transform.position, transform.rotation);
-            nextRafaga = Time.time + (fireRate/3);
+            nextRafaga = Time.time + (fireRate / 2);
         }
-        
+
     }
 
     void Disparar()
@@ -106,5 +118,22 @@ public class Spaceship : MonoBehaviour
             transform.position = new Vector2(transform.position.x, minY);
         }
     }
- 
+
+    public void HabilidadEspecial()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            if (Time.timeScale == 1 && veceshabilidad > 0)
+            {
+                Time.timeScale = 0.5f;
+                veceshabilidad--;
+            }
+            else
+            {
+                Time.timeScale = 1;
+
+            }
+        }
+    }
+
 }

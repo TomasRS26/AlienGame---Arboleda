@@ -137,3 +137,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   movingRight: 1
+  puntosDeVida: 0
